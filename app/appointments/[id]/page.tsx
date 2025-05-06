@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Textarea } from '../../components/ui/textarea';
 import { 
   Calendar, 
   Clock, 
@@ -25,7 +24,7 @@ import {
   cancelAppointment, 
   updateAppointment,
   Appointment as AppointmentType
-} from '@/lib/services/appointmentService';
+} from '../../../lib/services/appointmentService';
 import Link from 'next/link';
 
 // Extend the Appointment type to include fields we need
@@ -266,7 +265,7 @@ export default function AppointmentDetailsPage() {
                 </div>
               </div>
 
-              <Separator className="my-6" />
+              <div className="h-px w-full bg-gray-200 my-4"></div>
 
               <div>
                 <h3 className="font-medium mb-3">Appointment Notes</h3>
@@ -281,7 +280,7 @@ export default function AppointmentDetailsPage() {
 
               {appointment.status === 'cancelled' && (
                 <>
-                  <Separator className="my-6" />
+                  <div className="h-px w-full bg-gray-200 my-4"></div>
                   <div>
                     <h3 className="font-medium mb-3">Cancellation Details</h3>
                     <div className="bg-red-50 p-4 rounded-md">
@@ -400,7 +399,7 @@ export default function AppointmentDetailsPage() {
 
               {appointment.type === 'video' && appointment.status === 'scheduled' && (
                 <>
-                  <Separator className="my-5" />
+                  <div className="h-px w-full bg-gray-200 my-5"></div>
                   <div>
                     <h4 className="font-medium mb-3">Video Meeting Link</h4>
                     <Button className="w-full" asChild>
