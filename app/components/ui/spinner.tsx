@@ -1,0 +1,15 @@
+import React from 'react'
+import { cn } from '../../../lib/utils'
+
+interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export function Spinner({ className, ...props }: SpinnerProps) {
+  return (
+    <div
+      className={cn("animate-spin rounded-full border-2 border-current border-t-transparent size-4", className)}
+      {...props}
+      aria-label="Loading"
+      role="status"
+    />
+  )
+} 
