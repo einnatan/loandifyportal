@@ -298,7 +298,7 @@ export function DocumentUploader({
               </svg>
               <div className="mt-2 text-sm">
                 <p className="font-medium text-green-700">{document.id || 'Document'}</p>
-                <p className="text-gray-500">{document.type} - {new Date().toLocaleString()}</p>
+                <p className="text-gray-500">{document.documentType} - {new Date().toLocaleString()}</p>
               </div>
               
               <Button
