@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { Document } from '../../../lib/services/documentService';
+import { Document } from '../../../lib/types/document';
 import { 
   formatFileSize, 
   formatDate, 
@@ -43,7 +43,7 @@ export function DocumentViewer({ document, isOpen, onClose }: DocumentViewerProp
       return (
         <div className="flex justify-center p-4 bg-gray-100 rounded-md">
           <img 
-            src={document.url} 
+            src={document.fileUrl} 
             alt={document.name} 
             className="max-h-96 max-w-full object-contain"
           />
@@ -53,7 +53,7 @@ export function DocumentViewer({ document, isOpen, onClose }: DocumentViewerProp
       return (
         <div className="w-full h-96 p-4 bg-gray-100 rounded-md">
           <iframe 
-            src={`${document.url}#toolbar=0&navpanes=0`} 
+            src={`${document.fileUrl}#toolbar=0&navpanes=0`} 
             className="w-full h-full"
             title={document.name}
           />
@@ -78,7 +78,7 @@ export function DocumentViewer({ document, isOpen, onClose }: DocumentViewerProp
           </svg>
           <h3 className="text-lg font-medium mb-2">Preview Not Available</h3>
           <p className="text-gray-500 mb-4">This document type cannot be previewed directly.</p>
-          <Button onClick={() => window.open(document.url, '_blank')}>
+          <Button onClick={() => window.open(document.fileUrl, '_blank')}>
             Download Document
           </Button>
         </div>
@@ -109,7 +109,7 @@ export function DocumentViewer({ document, isOpen, onClose }: DocumentViewerProp
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-700 mb-1">Upload Date</h3>
-              <p className="text-sm text-gray-900">{formatDate(document.uploadedAt)}</p>
+              <p className="text-sm text-gray-900">{formatDate(document.uploadDate)}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-700 mb-1">Size</h3>
@@ -122,7 +122,7 @@ export function DocumentViewer({ document, isOpen, onClose }: DocumentViewerProp
             <div>
               <h3 className="text-sm font-medium text-gray-700 mb-1">Verification</h3>
               <p className="text-sm text-gray-900">
-                {document.isVerified ? (
+                {document.verificationInfo?.verifiedDate ? (
                   <span className="text-green-600 flex items-center">
                     <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
