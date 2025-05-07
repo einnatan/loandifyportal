@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import { Document } from '../../../lib/services/documentService';
+import { Document } from '../../../lib/types/document';
 import { formatFileSize, formatDate, getDocumentTypeIcon } from '../../../lib/utils/documentUtils';
 
 interface DocumentCardProps {
@@ -14,7 +14,7 @@ interface DocumentCardProps {
 }
 
 export function DocumentCard({ document, onView, onShare, onDelete }: DocumentCardProps) {
-  const { name, type, status, uploadedAt, size, isVerified, tags } = document;
+  const { name, type, status, uploadDate, size, verificationInfo, tags } = document;
   
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -51,7 +51,7 @@ export function DocumentCard({ document, onView, onShare, onDelete }: DocumentCa
         
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2 mb-3">
-            {tags.map((tag, index) => (
+            {tags.map((tag: string, index: number) => (
               <span 
                 key={index} 
                 className="bg-gray-100 px-2 py-1 rounded-full text-xs text-gray-600"
@@ -63,8 +63,8 @@ export function DocumentCard({ document, onView, onShare, onDelete }: DocumentCa
         )}
         
         <div className="text-xs text-gray-500 mb-4">
-          Uploaded on {formatDate(uploadedAt)}
-          {isVerified && (
+          Uploaded on {formatDate(uploadDate)}
+          {verificationInfo?.verifiedDate && (
             <span className="ml-2 text-green-600 flex items-center">
               <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
