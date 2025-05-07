@@ -8,12 +8,10 @@ import { DocumentCard } from '../components/document/DocumentCard';
 import { DocumentUploader } from '../components/document/DocumentUploader';
 import { DocumentViewer } from '../components/document/DocumentViewer';
 import { 
-  Document, 
-  DocumentType, 
-  DocumentCategory,
   getUserDocuments,
   deleteDocument
 } from '../../lib/services/documentService';
+import { Document, DocumentType, DocumentCategory } from '../../lib/types/document';
 import { useI18n } from '../../lib/i18n/i18nContext';
 import { useTranslations } from 'next-intl';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
@@ -106,18 +104,18 @@ export default function DocumentsPage() {
         id: `doc-${Date.now()}`,
         userId: userId,
         name: files[0].name,
+        type: 'other',
+        category: 'personal',
         size: files[0].size,
         mimeType: files[0].type,
         uploadDate: new Date().toISOString(),
         lastModified: new Date().toISOString(),
-        type: 'other',
-        category: 'personal',
         status: 'processing',
+        fileUrl: URL.createObjectURL(files[0]),
         description: 'Newly uploaded document',
         tags: [],
         metadata: {},
-        securityLevel: 'private',
-        isArchived: false,
+        isArchived: false
       };
       
       setDocuments([newDoc, ...documents]);
@@ -154,16 +152,16 @@ export default function DocumentsPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'verified':
-        return <Badge variant="default">{t('documents.verified')}</Badge>;
+        return <Badge variant="default">{t('common', 'documents.verified')}</Badge>;
       case 'rejected':
-        return <Badge variant="destructive">{t('documents.rejected')}</Badge>;
+        return <Badge variant="destructive">{t('common', 'documents.rejected')}</Badge>;
       case 'pending':
-        return <Badge variant="secondary">{t('documents.pending')}</Badge>;
+        return <Badge variant="secondary">{t('common', 'documents.pending')}</Badge>;
       case 'processing':
         return (
           <Badge variant="outline" className="flex items-center gap-1">
             <Spinner className="size-3" />
-            {t('documents.processing')}
+            {t('common', 'documents.processing')}
           </Badge>
         );
       default:
@@ -259,7 +257,7 @@ export default function DocumentsPage() {
       
       {loading ? (
         <div className="py-12 text-center">
-          <Spinner size="lg" className="mx-auto mb-4" />
+          <Spinner className="mx-auto mb-4 size-8" />
           <p className="text-gray-500">Loading your documents...</p>
         </div>
       ) : filteredDocuments.length === 0 ? (

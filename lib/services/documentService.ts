@@ -1,23 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Document, DocumentCategory, DocumentStatus, DocumentType } from "../types/document";
 
-export interface Document {
-  id: string;
-  userId: string;
-  name: string;
-  type: DocumentType;
-  category: DocumentCategory;
-  size: number;
-  mimeType: string;
-  url: string;
-  status: DocumentStatus;
-  uploadedAt: string;
-  isVerified: boolean;
-  verifiedAt?: string;
-  tags: string[];
-  metadata: Record<string, any>;
-}
-
 // Mock document storage
 const documents: Document[] = [
   {
@@ -28,17 +11,18 @@ const documents: Document[] = [
     category: 'verification',
     size: 1024 * 1024 * 2.5, // 2.5 MB
     mimeType: 'application/pdf',
-    url: 'https://example.com/documents/identity-proof.pdf',
+    uploadDate: '2023-07-15T10:30:00Z',
+    lastModified: '2023-07-15T10:30:00Z',
     status: 'verified',
-    uploadedAt: '2023-07-15T10:30:00Z',
-    isVerified: true,
-    verifiedAt: '2023-07-16T14:20:00Z',
+    fileUrl: 'https://example.com/documents/identity-proof.pdf',
+    description: 'Proof of Identity Document',
     tags: ['passport', 'verification', 'identity'],
     metadata: {
       expiryDate: '2028-05-20',
       issueCountry: 'Singapore',
       documentNumber: 'A12345678'
-    }
+    },
+    isArchived: false
   },
   {
     id: 'doc-2',
@@ -48,17 +32,18 @@ const documents: Document[] = [
     category: 'loan_application',
     size: 1024 * 1024 * 1.8, // 1.8 MB
     mimeType: 'application/pdf',
-    url: 'https://example.com/documents/income-statement.pdf',
+    uploadDate: '2023-07-12T09:15:00Z',
+    lastModified: '2023-07-12T09:15:00Z',
     status: 'verified',
-    uploadedAt: '2023-07-12T09:15:00Z',
-    isVerified: true,
-    verifiedAt: '2023-07-13T11:40:00Z',
+    fileUrl: 'https://example.com/documents/income-statement.pdf',
+    description: 'Income Statement Document',
     tags: ['income', 'statement', 'salary'],
     metadata: {
       period: 'Jan 2023 - Jun 2023',
       employer: 'ABC Corporation',
       totalIncome: '$45,000'
-    }
+    },
+    isArchived: false
   },
   {
     id: 'doc-3',
@@ -68,16 +53,18 @@ const documents: Document[] = [
     category: 'verification',
     size: 1024 * 1024 * 3.2, // 3.2 MB
     mimeType: 'application/pdf',
-    url: 'https://example.com/documents/bank-statement.pdf',
+    uploadDate: '2023-07-18T14:50:00Z',
+    lastModified: '2023-07-18T14:50:00Z',
     status: 'pending',
-    uploadedAt: '2023-07-18T14:50:00Z',
-    isVerified: false,
+    fileUrl: 'https://example.com/documents/bank-statement.pdf',
+    description: 'Bank Statement Document',
     tags: ['bank', 'statement', 'finance'],
     metadata: {
       bankName: 'DBS Bank',
       accountNumber: 'xxxx-xxxx-4567',
       period: 'Apr 2023 - Jun 2023'
-    }
+    },
+    isArchived: false
   },
   {
     id: 'doc-4',
@@ -87,18 +74,19 @@ const documents: Document[] = [
     category: 'ongoing_loan',
     size: 1024 * 1024 * 1.5, // 1.5 MB
     mimeType: 'application/pdf',
-    url: 'https://example.com/documents/loan-agreement.pdf',
+    uploadDate: '2023-06-25T16:20:00Z',
+    lastModified: '2023-06-25T16:20:00Z',
     status: 'verified',
-    uploadedAt: '2023-06-25T16:20:00Z',
-    isVerified: true,
-    verifiedAt: '2023-06-26T10:10:00Z',
+    fileUrl: 'https://example.com/documents/loan-agreement.pdf',
+    description: 'Loan Agreement Document',
     tags: ['contract', 'loan', 'agreement'],
     metadata: {
       loanId: 'LOAN-2023-001',
       loanAmount: '$25,000',
       interestRate: '3.5%',
       term: '5 years'
-    }
+    },
+    isArchived: false
   },
   {
     id: 'doc-5',
@@ -108,16 +96,18 @@ const documents: Document[] = [
     category: 'verification',
     size: 1024 * 1024 * 0.8, // 0.8 MB
     mimeType: 'image/jpeg',
-    url: 'https://example.com/documents/address-proof.jpg',
+    uploadDate: '2023-07-10T11:25:00Z',
+    lastModified: '2023-07-10T11:25:00Z',
     status: 'rejected',
-    uploadedAt: '2023-07-10T11:25:00Z',
-    isVerified: false,
+    fileUrl: 'https://example.com/documents/address-proof.jpg',
+    description: 'Proof of Address Document',
     tags: ['address', 'utility', 'bill'],
     metadata: {
       addressType: 'Residential',
       issueDate: '2023-06-15',
       rejectionReason: 'Document is older than 3 months'
-    }
+    },
+    isArchived: false
   }
 ];
 
@@ -192,17 +182,19 @@ export async function uploadDocument(userId: string, options: UploadDocumentOpti
         category,
         size: file.size,
         mimeType: file.type,
-        url: URL.createObjectURL(file), // In a real app, this would be a server URL
+        uploadDate: new Date().toISOString(),
+        lastModified: new Date().toISOString(),
         status: 'pending',
-        uploadedAt: new Date().toISOString(),
-        isVerified: false,
+        fileUrl: URL.createObjectURL(file), // In a real app, this would be a server URL
+        description: `Uploaded ${name}`,
         tags,
-        metadata: {}
+        metadata: {},
+        isArchived: false
       };
       
       documents.push(newDocument);
       resolve(newDocument);
-    }, 1500);
+    }, 1000);
   });
 }
 
