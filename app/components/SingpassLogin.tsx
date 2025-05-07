@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { generateLoginUrl } from '../../lib/services/singpassService';
+import { generateSingpassLoginUrl } from '../../lib/services/singpassService';
 import Image from 'next/image';
 
 interface SingpassLoginProps {
@@ -21,7 +21,7 @@ export const SingpassLogin: React.FC<SingpassLoginProps> = ({
       setIsLoading(true);
       
       // Generate the Singpass login URL
-      const loginUrl = generateLoginUrl();
+      const loginUrl = generateSingpassLoginUrl();
       
       // Redirect to Singpass login
       window.location.href = loginUrl;
