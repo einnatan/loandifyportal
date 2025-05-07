@@ -3,11 +3,8 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '../ui/button';
 import { Spinner } from '../ui/spinner';
-import { 
-  DocumentType, 
-  DocumentCategory, 
-  uploadDocument 
-} from '../../../lib/services/documentService';
+import { uploadDocument } from '../../../lib/services/documentService';
+import { DocumentType, DocumentCategory } from '../../../lib/types/document';
 import { formatFileSize } from '../../../lib/utils/documentUtils';
 
 interface DocumentUploaderProps {
@@ -250,26 +247,10 @@ export function DocumentUploader({
       )}
       
       {isUploading && (
-        <div className="mb-4">
-          <div className="relative pt-1">
-            <div className="flex mb-2 items-center justify-between">
-              <div>
-                <span className="text-xs font-semibold inline-block text-primary">
-                  Uploading...
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="text-xs font-semibold inline-block text-primary">
-                  {uploadProgress}%
-                </span>
-              </div>
-            </div>
-            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-              <div 
-                style={{ width: `${uploadProgress}%` }}
-                className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary transition-all duration-300"
-              ></div>
-            </div>
+        <div className="mt-4">
+          <div className="flex items-center justify-center">
+            <Spinner className="mr-2" />
+            <span>Uploading... {uploadProgress}%</span>
           </div>
         </div>
       )}
@@ -281,7 +262,7 @@ export function DocumentUploader({
       >
         {isUploading ? (
           <div className="flex items-center justify-center">
-            <Spinner size="sm" className="mr-2" />
+            <Spinner className="mr-2" />
             <span>Uploading...</span>
           </div>
         ) : (
