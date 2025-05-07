@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { DocumentType } from '../services/documentService';
+import { DocumentType } from '../types/document';
 
 /**
  * Format bytes to a human-readable file size
