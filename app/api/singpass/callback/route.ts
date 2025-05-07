@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { handleSingpassCallback } from '@/lib/services/singpassService';
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // Process the callback

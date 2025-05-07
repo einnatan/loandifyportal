@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Card, Title, Text, Button, Slider, Divider, Surface, DataTable, Chip } from 'react-native-paper';
+import { Card, Title, Text, Button, Divider, Surface, DataTable, Chip } from 'react-native-paper';
+import { Slider as MuiSlider } from '@mui/material';
 
 export default function LoanCalculatorScreen() {
   // State for loan parameters
@@ -108,11 +109,11 @@ export default function LoanCalculatorScreen() {
               <Text>Loan Amount</Text>
               <Text style={styles.sliderValue}>{formatCurrency(loanAmount)}</Text>
             </View>
-            <Slider
+            <MuiSlider
               value={loanAmount}
-              onValueChange={value => setLoanAmount(value)}
-              minimumValue={1000}
-              maximumValue={100000}
+              onChange={(_, value) => setLoanAmount(value as number)}
+              min={1000}
+              max={100000}
               step={1000}
             />
           </View>
@@ -122,11 +123,11 @@ export default function LoanCalculatorScreen() {
               <Text>Loan Term (months)</Text>
               <Text style={styles.sliderValue}>{loanTerm}</Text>
             </View>
-            <Slider
+            <MuiSlider
               value={loanTerm}
-              onValueChange={value => setLoanTerm(value)}
-              minimumValue={6}
-              maximumValue={60}
+              onChange={(_, value) => setLoanTerm(value as number)}
+              min={6}
+              max={60}
               step={6}
             />
           </View>
@@ -136,11 +137,11 @@ export default function LoanCalculatorScreen() {
               <Text>Interest Rate (%)</Text>
               <Text style={styles.sliderValue}>{interestRate.toFixed(2)}%</Text>
             </View>
-            <Slider
+            <MuiSlider
               value={interestRate}
-              onValueChange={value => setInterestRate(value)}
-              minimumValue={1}
-              maximumValue={10}
+              onChange={(_, value) => setInterestRate(value as number)}
+              min={1}
+              max={10}
               step={0.1}
             />
           </View>
@@ -150,11 +151,11 @@ export default function LoanCalculatorScreen() {
               <Text>Down Payment</Text>
               <Text style={styles.sliderValue}>{formatCurrency(downPayment)}</Text>
             </View>
-            <Slider
+            <MuiSlider
               value={downPayment}
-              onValueChange={value => setDownPayment(value)}
-              minimumValue={0}
-              maximumValue={loanAmount * 0.5}
+              onChange={(_, value) => setDownPayment(value as number)}
+              min={0}
+              max={loanAmount * 0.5}
               step={500}
             />
           </View>
@@ -164,11 +165,11 @@ export default function LoanCalculatorScreen() {
               <Text>Processing Fee (%)</Text>
               <Text style={styles.sliderValue}>{processingFee.toFixed(2)}%</Text>
             </View>
-            <Slider
+            <MuiSlider
               value={processingFee}
-              onValueChange={value => setProcessingFee(value)}
-              minimumValue={0}
-              maximumValue={3}
+              onChange={(_, value) => setProcessingFee(value as number)}
+              min={0}
+              max={3}
               step={0.1}
             />
           </View>

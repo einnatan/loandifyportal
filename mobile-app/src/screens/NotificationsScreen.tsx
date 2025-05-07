@@ -269,7 +269,7 @@ export default function NotificationsScreen() {
                   <IconButton
                     icon="delete"
                     size={20}
-                    color="#999"
+                    iconColor="#999"
                     onPress={() => deleteNotification(notification.id)}
                     style={styles.deleteButton}
                   />
