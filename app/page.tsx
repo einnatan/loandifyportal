@@ -108,23 +108,23 @@ export default function Home() {
         <div className="absolute -bottom-24 -left-24 w-96 h-96 decorative-blob-2"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center">
-            <div className="md:w-1/2 md:pr-8 mb-10 md:mb-0">
+          <div className="flex flex-col md:flex-row md:items-center md:gap-8">
+            <div className="md:w-1/2 md:pr-4 mb-10 md:mb-0">
               <motion.h1 
-                className="text-4xl md:text-5xl font-bold mb-6 leading-tight font-display"
+                className="text-4xl md:text-5xl font-bold mb-5 leading-tight font-display"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="text-gradient text-gradient-primary">Find and compare</span> the best personal loans
+                <span className="text-gradient text-gradient-primary">Uncover Your Available Credit:</span> Compare Personalized Loan Rates
               </motion.h1>
               <motion.p 
-                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                One application, multiple offers. Compare personalized rates from top lenders.
+                Find loan options tailored to your credit eligibility. One application, multiple offers from top lenders based on your accessible credit.
               </motion.p>
               <motion.div
                 className="flex flex-col sm:flex-row gap-4"
@@ -132,7 +132,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                <Button href={`/apply?amount=${loanAmount}&term=${loanTerm}`} size="lg" className="flex gap-2 items-center bg-gradient-primary text-white font-bold shadow-lg hover:shadow-xl">
+                <Button href={`/apply?amount=${loanAmount}&term=${loanTerm}`} size="lg" className="flex gap-2 items-center justify-center bg-gradient-primary text-white font-bold shadow-lg hover:shadow-xl px-8">
                   Get Started <ChevronRight size={20} />
                 </Button>
               </motion.div>
@@ -145,12 +145,13 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-primary opacity-10 rounded-full translate-x-20 -translate-y-20 blur-2xl"></div>
-                <h2 className="text-2xl font-bold mb-6 font-display">Loan Calculator</h2>
+                <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-secondary opacity-5 rounded-full -translate-x-20 translate-y-20 blur-2xl"></div>
+                <h2 className="text-2xl font-bold mb-5 font-display">Loan Calculator</h2>
                 
                 {/* Loan Amount Section */}
-                <div className="mb-6">
+                <div className="mb-5">
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium">Loan Amount</label>
+                    <label className="text-sm font-medium text-gray-700">Loan Amount</label>
                     <div className="relative">
                       <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                       <input 
@@ -182,9 +183,9 @@ export default function Home() {
                 </div>
                 
                 {/* Loan Term Section */}
-                <div className="mb-6">
+                <div className="mb-5">
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium">Loan Term</label>
+                    <label className="text-sm font-medium text-gray-700">Loan Term</label>
                     <div className="relative flex items-center">
                       <input 
                         type="text" 
@@ -216,34 +217,32 @@ export default function Home() {
                 </div>
                 
                 {/* Results Section */}
-                <div className="bg-blue-50/70 p-5 rounded-lg mb-6 border border-blue-100">
-                  <div className="flex justify-between mb-2 items-center">
-                    <span className="text-gray-600 text-base">Est. Monthly Payment:</span>
-                    <span className="font-bold text-base">${monthlyPayment.toLocaleString()}/mo</span>
+                <div className="bg-blue-50/70 p-5 rounded-lg mb-5 border border-blue-100">
+                  <div className="flex justify-between mb-3 items-center">
+                    <span className="text-gray-700 text-base">Est. Monthly Payment:</span>
+                    <span className="font-bold text-lg text-blue-700">${monthlyPayment.toLocaleString()}/mo</span>
                   </div>
-                  <div className="flex justify-between mb-2 items-center">
-                    <span className="text-gray-600 text-base">Interest Rate:</span>
+                  <div className="flex justify-between mb-3 items-center">
+                    <span className="text-gray-700 text-base">Interest Rate:</span>
                     <span className="font-bold text-base">{interestRate}%</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600 text-base">Total Repayment:</span>
+                    <span className="text-gray-700 text-base">Total Repayment:</span>
                     <span className="font-bold text-base">${(monthlyPayment * loanTerm).toLocaleString()}</span>
                   </div>
                 </div>
                 
-                <Button href={`/apply?amount=${loanAmount}&term=${loanTerm}`} className="w-full flex gap-2 items-center justify-center bg-gradient-primary text-white font-bold shadow-lg hover:shadow-xl">
+                <Button href={`/apply?amount=${loanAmount}&term=${loanTerm}`} className="w-full flex gap-2 items-center justify-center bg-gradient-primary text-white font-bold shadow-lg hover:shadow-xl py-3">
                   Get Your Loan Options <ArrowRight size={16} />
                 </Button>
                 
                 {/* Small Print Text */}
                 <p className="text-xs text-gray-500 mt-4 leading-tight">
                   Representative example: For a loan of ${loanAmount.toLocaleString()} over {loanTerm} months at {interestRate}% p.a. (fixed), 
-                  monthly repayment of ${monthlyPayment.toLocaleString()}, total cost of credit ${((monthlyPayment * loanTerm) - loanAmount).toLocaleString()}, 
-                  total amount repayable ${(monthlyPayment * loanTerm).toLocaleString()}.
+                  monthly repayment of ${monthlyPayment.toLocaleString()}, total cost of credit ${((monthlyPayment * loanTerm) - loanAmount).toLocaleString()}.
                 </p>
                 <p className="text-xs text-gray-500 mt-2 leading-tight">
                   Rates from 4.5% - 14.9% APR. Loan amounts from $1,000 - $100,000. No origination fee or early repayment fee.
-                  Actual rates and loan amounts will be determined based on your application and credit assessment.
                 </p>
               </motion.div>
             </div>
