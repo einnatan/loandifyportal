@@ -192,6 +192,11 @@ export default function OffersPage() {
   const [sortedIndividualOffers, setSortedIndividualOffers] = useState<LoanOfferDetail[]>(individualOffers);
   const [sortedBundleOffers, setSortedBundleOffers] = useState<BundleOffer[]>(bundleOffers);
   
+  // Calculate total accessible credit - considering the maximum possible amount
+  const maxIndividualCredit = Math.max(...individualOffers.map(offer => offer.amount));
+  const maxBundleCredit = Math.max(...bundleOffers.map(bundle => bundle.totalAmount));
+  const totalAccessibleCredit = Math.max(maxIndividualCredit, maxBundleCredit);
+  
   // Helper function to sort offers
   const sortOffers = (filterType: 'amount' | 'tenure' | 'interestRate' | 'monthlyPayment' | 'totalInterest' | 'processingFee' | null) => {
     // Sort individual offers
@@ -321,6 +326,42 @@ export default function OffersPage() {
               and {sortedBundleOffers.length} bundled offers for you.
             </motion.p>
           </div>
+          
+          {/* Accessible Credit Section */}
+          <motion.div
+            className="bg-white rounded-xl shadow-md border border-gray-100 p-6 mb-8 relative overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-primary opacity-5 rounded-full translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between relative z-10">
+              <div className="mb-4 md:mb-0">
+                <h2 className="text-2xl font-bold text-gray-900 mb-1">Your Accessible Credit</h2>
+                <p className="text-gray-600">The maximum amount of credit available to you based on your application</p>
+              </div>
+              <div className="bg-gradient-primary text-white rounded-xl px-6 py-4 text-center shadow-md">
+                <div className="text-lg font-medium mb-1">Total Credit Available</div>
+                <div className="text-3xl font-bold">${totalAccessibleCredit.toLocaleString()}</div>
+              </div>
+            </div>
+            <div className="mt-5 pt-5 border-t border-gray-100">
+              <div className="text-sm text-gray-500">
+                <div className="flex items-start mb-2">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <p>Your credit score and financial profile qualify you for this amount of total lending</p>
+                </div>
+                <div className="flex items-start mb-2">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <p>You can choose a single loan or multiple smaller loans up to this amount</p>
+                </div>
+                <div className="flex items-start">
+                  <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <p>Bundled offers allow you to access more of your available credit through multiple lenders</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Tabs */}
           <div className="rounded-xl bg-white p-2 border border-gray-100 shadow-sm mb-6">
