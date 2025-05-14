@@ -68,7 +68,7 @@ export default function ApplicationSuccessPage() {
               <div className="flex justify-center mb-4">
                 <CheckCircle2 className="h-16 w-16 text-green-500" />
               </div>
-              <CardTitle className="text-2xl text-center">Application Submitted Successfully!</CardTitle>
+              <CardTitle className="text-2xl text-center">Your loan application has been successfully submitted.</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-muted p-4 rounded-lg">

@@ -1561,7 +1561,7 @@ function SubmissionSummaryStep() {
       <div>
         <h3 className="text-2xl font-bold text-green-700 mb-2">Application Submitted!</h3>
         <p className="text-gray-600 mb-8 max-w-md mx-auto">
-          Your loan application has been successfully submitted. We'll review your information and provide personalized offers soon.
+          Your loan application has been successfully submitted.
         </p>
       </div>
       
@@ -1582,14 +1582,14 @@ function SubmissionSummaryStep() {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Estimated Time:</span>
-            <span className="font-medium">24-48 hours</span>
+            <span className="font-medium">1 hour</span>
           </div>
         </div>
       </div>
       
       <div>
         <p className="text-gray-600 mb-6">
-          What happens next? We'll review your application and provide personalized loan offers from our lending partners. You'll be notified by email when your offers are ready.
+          What happens next? We'll review your application, and provide you with your accessible credit and personalised offers from our lending partners. You'll be notified by whatsapps when your offers are ready.
         </p>
       </div>
     </motion.div>

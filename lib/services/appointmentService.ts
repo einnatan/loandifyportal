@@ -66,6 +66,13 @@ const mockLenders: Lender[] = [
     logoUrl: '/logos/uob.png',
     address: '80 Raffles Place, UOB Plaza 1, Singapore 048624',
     contactInfo: 'loans@uob.com.sg | +65 6123 4570'
+  },
+  {
+    id: 'lender-005',
+    name: 'Apex Capital',
+    logoUrl: '/logos/apex.png',
+    address: '1 Raffles Quay, North Tower, Singapore 048583',
+    contactInfo: 'loans@apexcapital.com.sg | +65 6123 4571'
   }
 ];
 

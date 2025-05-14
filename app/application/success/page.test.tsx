@@ -1,7 +1,11 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import * as testingLibrary from '@testing-library/dom';
 import ApplicationSuccessPage from './page';
 import { getLoanApplicationStatus } from '../../../lib/services/bankApiService';
+
+// Add destructured imports from the correct library
+const { screen, waitFor } = testingLibrary;
 
 // Mock the next/navigation hooks
 jest.mock('next/navigation', () => ({
@@ -67,7 +71,7 @@ describe('ApplicationSuccessPage', () => {
     });
     
     // Check if status information is displayed
-    expect(screen.getByText('Application Submitted Successfully!')).toBeInTheDocument();
+    expect(screen.getByText('Your loan application has been successfully submitted.')).toBeInTheDocument();
     expect(screen.getByText('test-app-123')).toBeInTheDocument();
     expect(screen.getByText('PENDING APPROVAL')).toBeInTheDocument();
     
